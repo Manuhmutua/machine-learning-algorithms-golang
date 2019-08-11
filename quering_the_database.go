@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	_ "github.com/lib/pq"
 	"log"
 	"os"
@@ -39,4 +40,27 @@ func main() {
 		log.Fatal(err)
 	}
 	defer rows.Close()
+
+	// Iterate over the rows, sending the results to
+	// standard out.
+	for rows.Next() {
+
+		var (
+			sLength float64
+			sWidth float64
+			pLength float64
+			pWidth float64
+		)
+
+		if err := rows.Scan(&sLength, &sWidth, &pLength, &pWidth); err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Printf("%.2f, %.2f, %.2f, %.2f\n", sLength, sWidth, pLength, pWidth)
+	}
+
+	// Check for errors after we are done iterating over rows.
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
 }
