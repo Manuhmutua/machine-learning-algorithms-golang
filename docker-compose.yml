@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: pasword
+      POSTGRES_USER: username
+      POSTGRES_DB: database
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  script:
+    image: golang:1.8
+    command: >
+      bash -c "if [ -f /go/src/app/main.go ]; then
+      go get -d -v ./... && go install -v ./... && app;
+      fi"
+    volumes:
+      - ./connecting_to_sql_database.go:/go/src/app/main.go
+    restart: always
+    working_dir: /go/src/app
+    environment:
+      PGURL: postgres://username:pasword@localhost:5432/database

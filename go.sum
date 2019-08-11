@@ -12,3 +12,5 @@ github.com/gonum/stat v0.0.0-20181125101827-41a0da705a5b h1:fbskpz/cPqWH8VqkQ7LJ
 github.com/gonum/stat v0.0.0-20181125101827-41a0da705a5b/go.mod h1:Z4GIJBJO3Wa4gD4vbwQxXXZ+WHmW6E9ixmNrwvs0iZs=
 github.com/kniren/gota v0.9.0 h1:ywFrdNxkBD5Xypk5BxjCaKiH507oQVXIf31pTvRhC4I=
 github.com/kniren/gota v0.9.0/go.mod h1:w95cKEouhCsZrpR98avELg50OeJfPGV3kkhK01Npn9w=
+github.com/lib/pq v1.2.0 h1:LXpIM/LZ5xGFhOpXAQUIMM1HdyqzVYM13zNdjCEEcA0=
+github.com/lib/pq v1.2.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
