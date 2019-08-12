@@ -10,12 +10,12 @@ import (
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/vg"
 	"log"
+	"math"
 	"os"
 	"strconv"
 )
 
 func main() {
-
 	// Open the CSV file.
 	advertFile, err := os.Open("Advertising.csv")
 	if err != nil {
@@ -176,7 +176,7 @@ func main() {
 	// In this case we are going to try and model our Sales (y)
 	// by the TV feature plus an intercept. As such, let's create
 	// the struct needed to train a model using github.com/sajari/regression.
-	var r .Regression
+	var r regression.Regression
 	r.SetObserved("Sales")
 	r.SetVar(0, "TV")
 
@@ -201,7 +201,7 @@ func main() {
 		}
 
 		// Add these points to the regression value.
-		r.Train(.DataPoint(yVal, []float64{tvVal}))
+		r.Train(regression.DataPoint(yVal, []float64{tvVal}))
 	}
 
 	// Train/fit the regression model.
@@ -211,4 +211,115 @@ func main() {
 	fmt.Printf("\nRegression Formula:\n%v\n\n", r.Formula)
 
 
+	// Open the test dataset file.
+	f, err = os.Open("test.csv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	// Create a CSV reader reading from the opened file.
+	reader = csv.NewReader(f)
+
+	// Read in all of the CSV records
+	reader.FieldsPerRecord = 4
+	testData, err := reader.ReadAll()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Loop over the test data predicting y and evaluating the prediction
+	// with the mean absolute error.
+	var mAE float64
+	for i, record := range testData {
+
+		// Skip the header.
+		if i == 0 {
+			continue
+		}
+
+		// Parse the observed Sales, or "y".
+		yObserved, err := strconv.ParseFloat(record[3], 64)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// Parse the TV value.
+		tvVal, err := strconv.ParseFloat(record[0], 64)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// Predict y with our trained model.
+		yPredicted, err := r.Predict([]float64{tvVal})
+
+		// Add the to the mean absolute error.
+		mAE += math.Abs(yObserved-yPredicted) / float64(len(testData))
+	}
+
+	// Output the MAE to standard out.
+	fmt.Printf("MAE = %0.2f\n\n", mAE)
+
+	// Open the advertising dataset file.
+	f, err = os.Open("Advertising.csv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	// Create a dataframe from the CSV file.
+	advertDF = dataframe.ReadCSV(f)
+
+	// Extract the target column.
+	yVals = advertDF.Col("Sales").Float()
+
+	// pts will hold the values for plotting.
+	pts := make(plotter.XYs, advertDF.Nrow())
+
+	// ptsPred will hold the predicted values for plotting.
+	ptsPred := make(plotter.XYs, advertDF.Nrow())
+
+	// Fill pts with data.
+	for i, floatVal := range advertDF.Col("TV").Float() {
+		pts[i].X = floatVal
+		pts[i].Y = yVals[i]
+		ptsPred[i].X = floatVal
+		ptsPred[i].Y = predict(floatVal)
+	}
+
+	// Create the plot.
+	p, err := plot.New()
+	if err != nil {
+		log.Fatal(err)
+	}
+	p.X.Label.Text = "TV"
+	p.Y.Label.Text = "Sales"
+	p.Add(plotter.NewGrid())
+
+	// Add the scatter plot points for the observations.
+	s, err := plotter.NewScatter(pts)
+	if err != nil {
+		log.Fatal(err)
+	}
+	s.GlyphStyle.Radius = vg.Points(3)
+
+	// Add the line plot points for the predictions.
+	l, err := plotter.NewLine(ptsPred)
+	if err != nil {
+		log.Fatal(err)
+	}
+	l.LineStyle.Width = vg.Points(1)
+	l.LineStyle.Dashes = []vg.Length{vg.Points(5), vg.Points(5)}
+
+	// Save the plot to a PNG file.
+	p.Add(s, l)
+	if err := p.Save(4*vg.Inch, 4*vg.Inch, "regression_line.png"); err != nil {
+		log.Fatal(err)
+	}
+
+}
+
+// predict uses our trained regression model to made a prediction.
+func predict(tv float64) float64 {
+	return 7.07 + tv*0.05
 }
