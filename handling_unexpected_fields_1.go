@@ -1,10 +1,10 @@
 package main
 
 import (
-"encoding/csv"
-"io"
-"log"
-"os"
+	"encoding/csv"
+	"io"
+	"log"
+	"os"
 )
 
 func main() {
@@ -45,6 +45,5 @@ func main() {
 		// number of fields.
 		rawCSVData = append(rawCSVData, record)
 	}
-
 
 }
