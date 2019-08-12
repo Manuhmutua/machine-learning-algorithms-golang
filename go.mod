@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/ajstarks/svgo v0.0.0-20181006003313-6ce6a3bcf6cd // indirect
+	github.com/berkmancenter/ridge v0.0.0-20160817211126-84766bc56b56 // indirect
 	github.com/boltdb/bolt v1.3.1
 	github.com/fogleman/gg v1.3.0 // indirect
 	github.com/gonum/blas v0.0.0-20181208220705-f22b278b28ac // indirect
