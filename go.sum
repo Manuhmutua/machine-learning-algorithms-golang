@@ -28,6 +28,10 @@ github.com/montanaflynn/stats v0.5.0 h1:2EkzeTSqBB4V4bJwWrt5gIIrZmpJBcoIRGS2kWLg
 github.com/montanaflynn/stats v0.5.0/go.mod h1:wL8QJuTMNUDYhXwkmfOly8iTdp5TEcJFWZD2D7SIkUc=
 github.com/patrickmn/go-cache v2.1.0+incompatible h1:HRMgzkcYKYpi3C8ajMPV8OFXaaRUnok+kx1WdO15EQc=
 github.com/patrickmn/go-cache v2.1.0+incompatible/go.mod h1:3Qf8kWWT7OJRJbdiICTKqZju1ZixQ/KpMGzzAfe6+WQ=
+github.com/sajari/regression v1.0.0 h1:T5mq8B0477N4lMaWvBMxH0xVmoRdCvrbzcOWnsfPnWk=
+github.com/sajari/regression v1.0.0/go.mod h1:NeG/XTW1lYfGY7YV/Z0nYDV/RGh3wxwd1yW46835flM=
+github.com/sjwhitworth/golearn v0.0.0-20190725152426-6fcc2b4ea533 h1:BFDnPmi5di4y36x67U79NagFR4h3Bie5rhWUOLs+nl8=
+github.com/sjwhitworth/golearn v0.0.0-20190725152426-6fcc2b4ea533/go.mod h1:5XM+nkzGfErqVD/UT/J61wyPEUqlCDq1Sbm6mzjs7LI=
 golang.org/x/exp v0.0.0-20180321215751-8460e604b9de/go.mod h1:CJ0aWSM057203Lf6IL+f9T1iT9GByDxfZKAQTCR3kQA=
 golang.org/x/exp v0.0.0-20180807140117-3d87b88a115f/go.mod h1:CJ0aWSM057203Lf6IL+f9T1iT9GByDxfZKAQTCR3kQA=
 golang.org/x/exp v0.0.0-20190125153040-c74c464bbbf2 h1:y102fOLFqhV41b+4GPiJoa0k/x+pJcEi2/HB1Y5T6fU=

@@ -14,6 +14,8 @@ require (
 	github.com/lib/pq v1.2.0
 	github.com/montanaflynn/stats v0.5.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
+	github.com/sajari/regression v1.0.0
+	github.com/sjwhitworth/golearn v0.0.0-20190725152426-6fcc2b4ea533
 	golang.org/x/sys v0.0.0-20190804053845-51ab0e2deafa // indirect
 	gonum.org/v1/gonum v0.0.0-20190808205415-ced62fe5104b
 	gonum.org/v1/plot v0.0.0-20190515093506-e2840ee46a6b
