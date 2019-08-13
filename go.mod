@@ -16,6 +16,7 @@ require (
 	github.com/jung-kurt/gofpdf v1.6.0 // indirect
 	github.com/kniren/gota v0.9.0
 	github.com/lib/pq v1.2.0
+	github.com/mash/gokmeans v0.0.0-20170215130432-ea22cff45f59 // indirect
 	github.com/montanaflynn/stats v0.5.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/sajari/regression v1.0.0
